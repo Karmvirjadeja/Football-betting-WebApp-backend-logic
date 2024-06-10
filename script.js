@@ -635,10 +635,25 @@ const game = {
   },
 };
 
-const players1 = [...game.players[0]];
-const players2 = [...game.players[1]];
-const [gk1, ...fieldPlayers1] = [...game.players[0]];
-const [gk2, ...fieldPlayers2] = [...game.players[1]];
-const allPlayers = [...game.players[0], ...game.players[1]];
-const players1Final = [...game.players[0], 'Thiago', 'Coutinho', 'Perisic'];
-console.log(players1Final);
+const [players1, players2] = game.players;
+const [gk, ...fieldPlayers] = players1;
+const allPlayers = [...players1, ...players2];
+
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+
+//Destructuring the odds object from the game objects
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+
+const printGoals = function (...players) {
+  for (let i = 0; i < players.length; i++) {
+    console.log(`${players.length} goals were scored`);
+    console.log(`${players} `);
+  }
+};
+printGoals(...game.scored);
+
+team1 < team2 && console.log('Team 1 is more likely to win');
+team2 < team1 && console.log('Team 2 is more likely to win');
+team1 === team2 && console.log('I think it would be draw');
